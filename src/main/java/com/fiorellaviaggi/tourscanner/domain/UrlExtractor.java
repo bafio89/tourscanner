@@ -1,5 +1,6 @@
 package com.fiorellaviaggi.tourscanner.domain;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -13,18 +14,23 @@ public class UrlExtractor
 {
   private String BASE_PATH = "https://www.weroad.it/";
 
-  public List<URL> execute(HtmlPage homePage)
+  public List<TourUrls> execute(HtmlPage homePage)
   {
 
     List<HtmlAnchor> tourUrls = homePage.getByXPath("//a[@class='flex items-start ']");
 
-    return tourUrls.stream().map(this::buildURLfrom).collect(toList());
+    return tourUrls.stream().map(this::buildTourUrls).collect(toList());
 
+  }
+
+  private TourUrls buildTourUrls(HtmlAnchor it)
+  {
+    return new TourUrls(it.getFirstChild().getFirstChild().asText(), buildURLfrom(it));
   }
 
   private URL buildURLfrom(HtmlAnchor it)
   {
-    URL url = null;
+    URL url;
     try
     {
      url = new URL(BASE_PATH + it.getHrefAttribute());

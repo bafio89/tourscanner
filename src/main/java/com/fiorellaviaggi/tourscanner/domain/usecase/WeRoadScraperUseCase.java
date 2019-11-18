@@ -23,5 +23,6 @@ public class WeRoadScraperUseCase
   public void execute(HtmlPage page) {
 
     urlExtractor.execute(page);
+
   }
 }

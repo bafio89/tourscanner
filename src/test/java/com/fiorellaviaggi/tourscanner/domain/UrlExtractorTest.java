@@ -4,6 +4,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.junit.Test;
 
 import java.net.URL;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -21,6 +22,7 @@ public class UrlExtractorTest
 
     HtmlPage homePage = scraperService.execute(new URL("https://www.weroad.it/"));
 
-    assertThat(urlExtractor.execute(homePage).size(), is(148));
+    List<TourUrls> result = urlExtractor.execute(homePage);
+    assertThat(result.size(), is(148));
   }
 }
