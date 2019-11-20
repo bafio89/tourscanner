@@ -12,7 +12,7 @@
 	<artifactId>tourscanner</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>tourscanner</name>
-	<description>Tours scanner starter</description>
+	<services>Tours scanner starter</services>
 
 	<properties>
 		<java.version>1.8</java.version>

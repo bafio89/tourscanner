@@ -22,6 +22,8 @@ public class TravelInfoExtractorIT
 
     HtmlPage travelPage = scraperService.execute(new URL("https://www.weroad.it/viaggi/viaggio-cambogia-tour-10-giorni"));
 
-    assertThat(travelInfoExtractor.execute(travelPage), is(new TravelInfo("Cambogia", "", "1.299 €", asList("Phnom Penh"))));
+    TravelInfo cambogia = travelInfoExtractor.execute(travelPage, "Cambogia");
+    assertThat(cambogia, is(new TravelInfo("Cambogia", "", "", null, "1.299 €", asList("Phnom Penh"),
+                                                                                      null)));
   }
 }
