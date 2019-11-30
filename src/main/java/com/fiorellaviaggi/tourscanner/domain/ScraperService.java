@@ -18,8 +18,5 @@ public class ScraperService
 
     return client.getPage(url);
 
-//      String prova = page.getHtmlElementById("sect-coordinators").asText();
-//    }
-
   }
 }

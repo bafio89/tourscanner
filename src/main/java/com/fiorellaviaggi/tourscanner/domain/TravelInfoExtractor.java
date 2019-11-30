@@ -11,18 +11,17 @@ import static java.util.stream.Collectors.toList;
 
 public class TravelInfoExtractor
 {
+  private Integer COMPANY_ID = 1;
 
   private static final Logger LOGGER = LoggerFactory.getLogger(TravelInfoExtractor.class);
 
-  public TravelInfo execute(HtmlPage page, String country)
+  public TravelInfo execute(HtmlPage page, TourUrl tourUrl)
   {
-    List<HtmlElement> commonCashDescription = page.getByXPath("//div[@class='lg-col-4 desktop-pr-40px'][1]/descendant::span");
 
-
-    return new TravelInfo(country, extractTitle(page), extractTravelDuration(page),
+    return new TravelInfo(tourUrl.getTourName(), extractTitle(page), extractTravelDuration(page),
                           extractServices(page),
                           extractPrice(page), extractItinerary(page),
-                          extractCommonCash(page));
+                          extractCommonCash(page), COMPANY_ID, tourUrl.getUrl());
   }
 
   private CommonCash extractCommonCash(HtmlPage page){

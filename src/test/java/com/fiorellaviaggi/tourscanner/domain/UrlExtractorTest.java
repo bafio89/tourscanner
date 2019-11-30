@@ -22,7 +22,7 @@ public class UrlExtractorTest
 
     HtmlPage homePage = scraperService.execute(new URL("https://www.weroad.it/"));
 
-    List<TourUrls> result = urlExtractor.execute(homePage);
-    assertThat(result.size(), is(148));
+    List<TourUrl> result = urlExtractor.execute(homePage);
+    assertThat(result.size(), is(126));
   }
 }

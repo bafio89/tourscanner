@@ -1,8 +1,10 @@
 package com.fiorellaviaggi.tourscanner.domain;
 
-import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.fiorellaviaggi.tourscanner.domain.usecase.UrlCreationException;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -12,35 +14,32 @@ import static java.util.stream.Collectors.toList;
 
 public class UrlExtractor
 {
-  private String BASE_PATH = "https://www.weroad.it/";
+  private static final Logger LOGGER = LoggerFactory.getLogger(UrlExtractor.class);
+  private String BASE_PATH = "https://www.weroad.it";
 
-  public List<TourUrls> execute(HtmlPage homePage)
+  public List<TourUrl> execute(HtmlPage homePage)
   {
-
     List<HtmlAnchor> tourUrls = homePage.getByXPath("//a[@class='flex items-start ']");
 
     return tourUrls.stream().map(this::buildTourUrls).collect(toList());
 
   }
 
-  private TourUrls buildTourUrls(HtmlAnchor it)
+  private TourUrl buildTourUrls(HtmlAnchor it)
   {
-    return new TourUrls(it.getFirstChild().getFirstChild().asText(), buildURLfrom(it));
+    return new TourUrl(it.getFirstChild().getFirstChild().asText(), buildURLfrom(it));
   }
 
-  private URL buildURLfrom(HtmlAnchor it)
+  private URL buildURLfrom(HtmlAnchor urlHtmlElement)
   {
-    URL url;
     try
     {
-     url = new URL(BASE_PATH + it.getHrefAttribute());
+     return new URL(BASE_PATH + urlHtmlElement.getHrefAttribute());
     }
     catch (MalformedURLException e)
     {
-      e.printStackTrace();
-      throw new RuntimeException();
+      LOGGER.warn(String.format("Impossible to compose url from %s:", urlHtmlElement.getHrefAttribute()));
+      throw new UrlCreationException(e.toString());
     }
-
-    return url;
   }
 }

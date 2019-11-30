@@ -11,7 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
-import java.net.MalformedURLException;
+
 import java.net.URL;
 
 public class WeRoadScraperUseCaseIT
@@ -33,7 +33,10 @@ public class WeRoadScraperUseCaseIT
   @Before
   public void setUp() throws Exception
   {
-    weRoadScraperUseCase = new WeRoadScraperUseCase(scraperService, urlExtractor, travelInfoExtractor);
+    weRoadScraperUseCase = new WeRoadScraperUseCase(scraperService,
+                                                    urlExtractor,
+                                                    travelInfoExtractor,
+                                                    null, null);
   }
 
   @Test
