@@ -50,8 +50,8 @@ public class JdbcTourRepositoryTest
                                                    asList("Giorno 1", "Giorno 2"), commonCash, 1, new URL("http://www.alink.com"));
     tourRepository.save(travelInfoToInsert);
 
-    List<Nation> nationList = jdbcTemplate.query("SELECT * FROM NATION", mapResultInANation());
-    List<TravelInfo> travelInfo = jdbcTemplate.query("SELECT * FROM TOUR", mapResultInATour());
+    List<Nation> nationList = jdbcTemplate.query("SELECT * FROM tourscanner.nation", mapResultInANation());
+    List<TravelInfo> travelInfo = jdbcTemplate.query("SELECT * FROM tourscanner.tour", mapResultInATour());
 
     assertThat(nationList.get(0), is(new Nation(1, "Italia")));
     assertThat(travelInfo.get(0), is(expectedTravelInfo()));

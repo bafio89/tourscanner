@@ -12,8 +12,6 @@
 	<artifactId>tourscanner</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>tourscanner</name>
-	<services>Tours scanner starter</services>
-
 	<properties>
 		<java.version>1.8</java.version>
 		<postgresql.embedded.version>2.6</postgresql.embedded.version>
@@ -61,7 +59,6 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-jdbc</artifactId>
-      <scope>test</scope>
     </dependency>
 
 		<dependency>
@@ -92,6 +89,22 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>5.2.0.RELEASE</version>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
 		</dependency>
 
 	</dependencies>

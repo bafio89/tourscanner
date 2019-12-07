@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.net.URL;
 
-import static java.util.Arrays.asList;
+import static org.hibernate.validator.internal.util.CollectionHelper.asSet;
 
 public class PageCollectorIT
 {
@@ -20,6 +20,6 @@ public class PageCollectorIT
     pageCollector = new PageCollector(scraperService);
 
     pageCollector
-      .execute(asList(new TourUrl("Thailandia", new URL("https://www.weroad.it/viaggi/itinerari-thailandia"))));
+      .execute(asSet(new TourUrl("Thailandia", new URL("https://www.weroad.it/viaggi/viaggio-di-gruppo-islanda-trekking-adventure"))));
   }
 }

@@ -1,30 +1,32 @@
-CREATE TABLE NATION
+CREATE SCHEMA IF NOT EXISTS tourscanner;
+
+CREATE TABLE tourscanner.nation
 (
-    ID SERIAL,
-    NAME character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT "NATIONS_pkey" PRIMARY KEY (ID),
-    CONSTRAINT "NATION_ID_key" UNIQUE (ID),
-    CONSTRAINT "NATION_NAME_key" UNIQUE (NAME)
+    id SERIAL,
+    name character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "NATIONS_pkey" PRIMARY KEY (id),
+    CONSTRAINT "NATION_ID_key" UNIQUE (id),
+    CONSTRAINT "NATION_NAME_key" UNIQUE (name)
 
 );
 
-CREATE TABLE TOUR
+CREATE TABLE tourscanner.tour
 (
-    COMMON_CASH_DESCRIPTION text COLLATE pg_catalog."default",
-    COMMON_CASH_INCLUDED_SERVICES text COLLATE pg_catalog."default",
-    DURATION character varying(30) COLLATE pg_catalog."default",
-    ID SERIAL,
-    INCLUDED_SERVICES text COLLATE pg_catalog."default",
-    ITINERARY text COLLATE pg_catalog."default",
-    NATION_ID integer,
-    NOT_INCLUDED_SERVICES text COLLATE pg_catalog."default",
-    TITLE character varying(40) COLLATE pg_catalog."default" NOT NULL,
-    PRICE character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    COMPANY_ID integer NOT NULL,
-    LINK_TO_TOUR character varying(40) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT "TOUR_pkey" PRIMARY KEY (ID),
-    CONSTRAINT fk_nation FOREIGN KEY (NATION_ID)
-        REFERENCES NATION (ID) MATCH SIMPLE
+    common_cash_description text COLLATE pg_catalog."default",
+    common_cash_included_services text COLLATE pg_catalog."default",
+    duration character varying(30) COLLATE pg_catalog."default",
+    id SERIAL,
+    included_services text COLLATE pg_catalog."default",
+    itinerary text COLLATE pg_catalog."default",
+    nation_id integer,
+    not_included_services text COLLATE pg_catalog."default",
+    title character varying(40) COLLATE pg_catalog."default" NOT NULL,
+    price character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    company_id integer NOT NULL,
+    link_to_tour character varying(40) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "TOUR_pkey" PRIMARY KEY (id),
+    CONSTRAINT fk_nation FOREIGN KEY (nation_id)
+        REFERENCES nation (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 );

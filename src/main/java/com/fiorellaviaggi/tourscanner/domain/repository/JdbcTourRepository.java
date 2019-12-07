@@ -9,14 +9,27 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 public class JdbcTourRepository implements TourRepository
 {
-
-  private String NATION_QUERY = "INSERT INTO NATION (NAME) VALUES(:NAME)";
-  private String INSERT_TOUR_QUERY = "INSERT INTO TOUR (COMMON_CASH_DESCRIPTION," +
-    " COMMON_CASH_INCLUDED_SERVICES, DURATION, INCLUDED_SERVICES, ITINERARY, NATION_ID," +
-    "NOT_INCLUDED_SERVICES, TITLE, PRICE, COMPANY_ID, LINK_TO_TOUR )" +
+  private String NATION_QUERY = "INSERT INTO tourscanner.nation (name) VALUES(:NAME)" +
+                                " ON CONFLICT(name) DO UPDATE " +
+                                  "SET name = :NAME";
+  private String INSERT_TOUR_QUERY = "INSERT INTO tourscanner.tour (common_cash_description," +
+    " common_cash_included_services, duration, included_services, itinerary, nation_id," +
+    "not_included_services, title, price, company_id, link_to_tour )" +
     " VALUES(:COMMON_CASH_DESCRIPTION, :COMMON_CASH_INCLUDED_SERVICES," +
     " :DURATION, :INCLUDED_SERVICES, :ITINERARY, :NATION_ID, :NOT_INCLUDED_SERVICES, :TITLE," +
-    " :PRICE, :COMPANY_ID, :LINK_TO_TOUR)";
+    " :PRICE, :COMPANY_ID, :LINK_TO_TOUR) " +
+    "ON CONFLICT(link_to_tour) DO UPDATE " +
+    "SET common_cash_description = :COMMON_CASH_DESCRIPTION," +
+        "common_cash_included_services = :COMMON_CASH_INCLUDED_SERVICES," +
+        "duration = :DURATION," +
+        "included_services = :INCLUDED_SERVICES," +
+        "itinerary = :ITINERARY," +
+        "nation_id = :NATION_ID," +
+        "not_included_services = :NOT_INCLUDED_SERVICES," +
+        "title = :TITLE," +
+        "price = :PRICE," +
+        "company_id = :COMPANY_ID," +
+        "link_to_tour = :LINK_TO_TOUR";
 
 
   private TourAdapter fromDomainToRepository;

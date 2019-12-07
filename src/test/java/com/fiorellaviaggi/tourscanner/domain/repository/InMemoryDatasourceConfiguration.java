@@ -2,7 +2,6 @@ package com.fiorellaviaggi.tourscanner.domain.repository;
 
 import org.postgresql.Driver;
 import ru.yandex.qatools.embed.postgresql.EmbeddedPostgres;
-import ru.yandex.qatools.embed.postgresql.distribution.Version;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
@@ -22,7 +21,7 @@ public class InMemoryDatasourceConfiguration
   public EmbeddedPostgres embeddedPostgres() throws IOException
   {
     EmbeddedPostgres postgres = new EmbeddedPostgres();
-    url = postgres.start("localhost", 3306, "tourScanner", "postgres", "developer");
+    url = postgres.start("localhost", 3306, "fiorellaviaggi", "postgres", "developer");
     postgres.getProcess().get().importFromFile(
       new File(Thread.currentThread().getContextClassLoader().getResource("schema.sql").getFile()));
     postgres.getProcess().get().importFromFile(

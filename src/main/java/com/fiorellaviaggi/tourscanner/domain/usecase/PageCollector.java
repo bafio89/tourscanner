@@ -2,7 +2,6 @@ package com.fiorellaviaggi.tourscanner.domain.usecase;
 
 import com.fiorellaviaggi.tourscanner.domain.ScraperService;
 import com.fiorellaviaggi.tourscanner.domain.TourUrl;
-import com.fiorellaviaggi.tourscanner.domain.TravelInfoExtractor;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.slf4j.Logger;
@@ -16,6 +15,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static java.util.Arrays.asList;
+
 public class PageCollector
 {
   private static final Logger LOGGER = LoggerFactory.getLogger(PageCollector.class);
@@ -24,52 +25,79 @@ public class PageCollector
 
   private ScraperService scraperService;
 
+  private List<String> urlToBeSkipped = asList("https://www.weroad.it/viaggi/asia",
+                                               "https://www.weroad.it/viaggi/nord-america",
+                                               "https://www.weroad.it/viaggi/centro-america",
+                                               "https://www.weroad.it/viaggi/sud-america",
+                                               "https://www.weroad.it/viaggi/europa",
+                                               "https://www.weroad.it/viaggi/middle-east",
+                                               "https://www.weroad.it/viaggi/oceania",
+                                               "https://www.weroad.it/viaggi/africa");
+
   public PageCollector(ScraperService scraperService)
   {
     this.scraperService = scraperService;
   }
 
-  public List<HtmlPage> execute(List<TourUrl> toursUrls)
+  public List<Page> execute(Set<TourUrl> toursUrls)
   {
-    List<HtmlPage> pageLists = new ArrayList<>();
+    List<Page> pageLists = new ArrayList<>();
     toursUrls.forEach(it -> {
-      try
+      if (!urlToBeSkipped.contains(it.getUrl().toString()))
       {
-        HtmlPage page = scraperService.execute(it.getUrl());
-        pageLists.addAll(evaluatePage(page));
-      }
-      catch (IOException e)
-      {
-        LOGGER.warn(String.format("Something goes wrong getting page from %s ", it.getUrl()));
+        try
+        {
+          HtmlPage page = scraperService.execute(it.getUrl());
+          pageLists.addAll(evaluatePage(page, it));
+          LOGGER.info(String.format("Getting page from: %s", it.getUrl()));
+        }
+        catch (Exception e)
+        {
+          LOGGER.warn(String.format("Something goes wrong getting page from %s ", it.getUrl()));
+        }
       }
     });
 
     return pageLists;
   }
 
-  private List<HtmlPage> evaluatePage(HtmlPage page)
+  private List<Page> evaluatePage(HtmlPage page, TourUrl tourUrl)
   {
-    List<HtmlPage> pageLists = new ArrayList<>();
+    List<Page> pageLists = new ArrayList<>();
+
     List<HtmlAnchor> toursAnchorElements = page.getByXPath("//div[@class='travel-card ']//a[@href]");
 
-    if(toursAnchorElements.size() > 0){
-      Set<URL> urls = extractTourUrls(toursAnchorElements);
-
-      urls.forEach(it -> {
-        try
-        {
-          pageLists.add(scraperService.execute(it));
-        }
-        catch (IOException e)
-        {
-          LOGGER.warn(String.format("Something goes wrong getting page from %s ", it));
-        }
-      });
-    }else{
-      pageLists.add(page);
+    if (checkIfMultiTourPage(page))
+    {
+      pageLists.add(new Page(page, tourUrl));
+      return pageLists;
     }
 
+    Set<URL> urls = extractTourUrls(toursAnchorElements);
+
+    urls.forEach(it -> {
+      try
+      {
+        HtmlPage obtainedPage = scraperService.execute(it);
+        if (checkIfMultiTourPage(obtainedPage))
+        {
+          pageLists.add(new Page(obtainedPage, tourUrl));
+        }
+      }
+      catch (IOException e)
+      {
+        LOGGER.warn(String.format("Something goes wrong getting page from %s ", it));
+      }
+    });
+
     return pageLists;
+  }
+
+  private boolean checkIfMultiTourPage(HtmlPage page)
+  {
+    List<HtmlAnchor> toursAnchorElements = page.getByXPath("//div[@class='travel-card ']//a[@href]");
+
+    return toursAnchorElements.size() == 0;
   }
 
   private Set<URL> extractTourUrls(List<HtmlAnchor> tours)

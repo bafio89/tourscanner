@@ -1,6 +1,7 @@
 package com.fiorellaviaggi.tourscanner.domain;
 
 import java.net.URL;
+import java.util.Objects;
 
 public class TourUrl
 {
@@ -21,5 +22,21 @@ public class TourUrl
   public URL getUrl()
   {
     return url;
+  }
+
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    TourUrl tourUrl = (TourUrl) o;
+    return Objects.equals(tourName, tourUrl.tourName) &&
+      Objects.equals(url, tourUrl.url);
+  }
+
+  @Override
+  public int hashCode()
+  {
+    return Objects.hash(tourName, url);
   }
 }

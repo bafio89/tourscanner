@@ -33,8 +33,8 @@ public class WeRoadScraperUseCaseIT
   @Before
   public void setUp() throws Exception
   {
-    weRoadScraperUseCase = new WeRoadScraperUseCase(scraperService,
-                                                    urlExtractor,
+    weRoadScraperUseCase = new WeRoadScraperUseCase(
+      urlExtractor,
                                                     travelInfoExtractor,
                                                     null, null);
   }

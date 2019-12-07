@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: tourScanner
+
+  datasource:
+      url: jdbc:postgresql://localhost:5432/fiorellaViaggi
+      username: postgres
+      password: developer
+      max-connections: 10

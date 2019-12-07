@@ -8,7 +8,10 @@ import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static java.util.stream.Collectors.toList;
 
@@ -17,11 +20,11 @@ public class UrlExtractor
   private static final Logger LOGGER = LoggerFactory.getLogger(UrlExtractor.class);
   private String BASE_PATH = "https://www.weroad.it";
 
-  public List<TourUrl> execute(HtmlPage homePage)
+  public Set<TourUrl> execute(HtmlPage homePage)
   {
     List<HtmlAnchor> tourUrls = homePage.getByXPath("//a[@class='flex items-start ']");
 
-    return tourUrls.stream().map(this::buildTourUrls).collect(toList());
+    return new HashSet<>(tourUrls.stream().map(this::buildTourUrls).collect(toList()));
 
   }
 
@@ -32,9 +35,13 @@ public class UrlExtractor
 
   private URL buildURLfrom(HtmlAnchor urlHtmlElement)
   {
+    String url = urlHtmlElement.getHrefAttribute();
+    if(!url.contains(BASE_PATH)){
+      url = BASE_PATH + url;
+    }
     try
     {
-     return new URL(BASE_PATH + urlHtmlElement.getHrefAttribute());
+      return new URL(url);
     }
     catch (MalformedURLException e)
     {
