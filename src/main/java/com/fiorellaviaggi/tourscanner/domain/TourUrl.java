@@ -5,18 +5,18 @@ import java.util.Objects;
 
 public class TourUrl
 {
-  private String tourName;
+  private String nation;
   private URL url;
 
-  public TourUrl(String tourName, URL url)
+  public TourUrl(String nation, URL url)
   {
-    this.tourName = tourName;
+    this.nation = nation;
     this.url = url;
   }
 
-  public String getTourName()
+  public String getNation()
   {
-    return tourName;
+    return nation;
   }
 
   public URL getUrl()
@@ -30,13 +30,13 @@ public class TourUrl
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     TourUrl tourUrl = (TourUrl) o;
-    return Objects.equals(tourName, tourUrl.tourName) &&
+    return Objects.equals(nation, tourUrl.nation) &&
       Objects.equals(url, tourUrl.url);
   }
 
   @Override
   public int hashCode()
   {
-    return Objects.hash(tourName, url);
+    return Objects.hash(nation, url);
   }
 }

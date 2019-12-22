@@ -1,7 +1,8 @@
 package com.fiorellaviaggi.tourscanner;
 
 import com.fiorellaviaggi.tourscanner.domain.ScraperService;
-import com.fiorellaviaggi.tourscanner.domain.usecase.WeRoadScraperUseCase;
+import com.fiorellaviaggi.tourscanner.domain.usecase.ScraperUseCase;
+import com.fiorellaviaggi.tourscanner.domain.usecase.SiVolaScraperUseCase;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import org.springframework.boot.SpringApplication;
@@ -14,14 +15,17 @@ import java.net.URL;
 @SpringBootApplication
 public class TourscannerApplication {
 
-	private static WeRoadScraperUseCase weRoadScraperUseCase;
+	private static ScraperUseCase weRoadScraperService;
+	private static SiVolaScraperUseCase siVolaScraperService;
 
 	private static ScraperService scraperService;
 
-	public TourscannerApplication( WeRoadScraperUseCase weRoadScraperUseCase,
-																 ScraperService scraperService)
+	public TourscannerApplication(ScraperUseCase weRoadScraperService,
+																SiVolaScraperUseCase siVolaScraperService,
+																ScraperService scraperService)
 	{
-		this.weRoadScraperUseCase = weRoadScraperUseCase;
+		this.weRoadScraperService = weRoadScraperService;
+		this.siVolaScraperService = siVolaScraperService;
 		this.scraperService = scraperService;
 	}
 
@@ -30,7 +34,9 @@ public class TourscannerApplication {
 
 		try
 		{
-			weRoadScraperUseCase.execute(scraperService.execute(new URL("https://www.weroad.it")));
+//			weRoadScraperService.execute(scraperService.execute(new URL("https://www.weroad.it")));
+			siVolaScraperService.execute(scraperService.execute(new URL("https://www.sivola.it/viaggi")),
+																	 scraperService.execute(new URL("https://www.sivola.it/viaggi?page=2")));
 		}
 		catch (IOException e)
 		{

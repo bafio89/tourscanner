@@ -8,18 +8,18 @@ import java.net.URL;
 
 import static org.hibernate.validator.internal.util.CollectionHelper.asSet;
 
-public class PageCollectorIT
+public class WeRoadPageCollectorIT
 {
   private ScraperService scraperService = new ScraperService();
 
-  private PageCollector pageCollector;
+  private WeRoadPageCollector weRoadPageCollector;
 
   @Test
   public void collectPage() throws Exception
   {
-    pageCollector = new PageCollector(scraperService);
+    weRoadPageCollector = new WeRoadPageCollector(scraperService);
 
-    pageCollector
+    weRoadPageCollector
       .execute(asSet(new TourUrl("Thailandia", new URL("https://www.weroad.it/viaggi/viaggio-di-gruppo-islanda-trekking-adventure"))));
   }
 }

@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 
-public class PageCollector
+public class WeRoadPageCollector
 {
-  private static final Logger LOGGER = LoggerFactory.getLogger(PageCollector.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(WeRoadPageCollector.class);
 
   private String BASE_PATH = "https://www.weroad.it";
 
@@ -34,7 +34,7 @@ public class PageCollector
                                                "https://www.weroad.it/viaggi/oceania",
                                                "https://www.weroad.it/viaggi/africa");
 
-  public PageCollector(ScraperService scraperService)
+  public WeRoadPageCollector(ScraperService scraperService)
   {
     this.scraperService = scraperService;
   }
