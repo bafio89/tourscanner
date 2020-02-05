@@ -1,6 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS tourscanner;
 
-CREATE TABLE tourscanner.nation
+CREATE TABLE experience.nation
 (
     id SERIAL,
     name character varying(20) COLLATE pg_catalog."default" NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE tourscanner.nation
 
 );
 
-CREATE TABLE tourscanner.tour
+CREATE TABLE experience.tour
 (
     common_cash_description text COLLATE pg_catalog."default",
     common_cash_included_services text COLLATE pg_catalog."default",

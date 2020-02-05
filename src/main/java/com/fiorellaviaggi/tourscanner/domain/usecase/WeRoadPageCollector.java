@@ -67,7 +67,7 @@ public class WeRoadPageCollector
 
     List<HtmlAnchor> toursAnchorElements = page.getByXPath("//div[@class='travel-card ']//a[@href]");
 
-    if (checkIfMultiTourPage(page))
+    if (notMultiTour(page))
     {
       pageLists.add(new Page(page, tourUrl));
       return pageLists;
@@ -79,9 +79,11 @@ public class WeRoadPageCollector
       try
       {
         HtmlPage obtainedPage = scraperService.execute(it);
-        if (checkIfMultiTourPage(obtainedPage))
+        if (notMultiTour(obtainedPage))
         {
-          pageLists.add(new Page(obtainedPage, tourUrl));
+          pageLists.add(new Page(obtainedPage, new TourUrl(tourUrl.getNation(), it)));
+          LOGGER.info(String.format("Splitted page from: %s", it.toString()));
+
         }
       }
       catch (IOException e)
@@ -93,7 +95,7 @@ public class WeRoadPageCollector
     return pageLists;
   }
 
-  private boolean checkIfMultiTourPage(HtmlPage page)
+  private boolean notMultiTour(HtmlPage page)
   {
     List<HtmlAnchor> toursAnchorElements = page.getByXPath("//div[@class='travel-card ']//a[@href]");
 

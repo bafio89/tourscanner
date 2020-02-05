@@ -11,13 +11,13 @@ import static java.util.stream.Collectors.toList;
 
 public class TravelInfoExtractor
 {
-  protected static final String COMMON_CASH_DESCRIPTION_XPATH = "//div[@class='lg-col-4 desktop-pr-40px'][2]/descendant::p";
-  protected static final String COMMON_CASH_DESCRIPTION_ALTERNATIVE_XPATH = "//div[@class='lg-col-4 desktop-pr-40px'][2]/descendant::div[3]";
-  protected static final String COMMON_CASH_SERVICES_XPATH = "//div[@class='lg-col-4 desktop-pr-40px']/descendant::ul";
+  protected static final String COMMON_CASH_DESCRIPTION_XPATH = "//div[@class='lg:w-1/3 lg:pr-40px'][2]/descendant::p";
+  protected static final String COMMON_CASH_DESCRIPTION_ALTERNATIVE_XPATH = "//div[@class='lg:w-1/3 lg:pr-40px'][2]/descendant::div[3]";
+  protected static final String COMMON_CASH_SERVICES_XPATH = "//div[@class='lg:w-1/3 lg:pr-40px']/descendant::ul";
   protected static final String ITINERARY_XPATH = "//div[@class='left-testata']";
-  protected static final String PRICE_XPATH = "//div[@class='prezzo mt-15']";
-  protected static final String SERVICES_XPATH = "//div[@class='lg-col-4 desktop-pr-40px']/descendant::ul";
-  protected static final String TRAVEL_DURATION_XPATH = "//div[@class='numeri-viaggio']/descendant::div[@class='text']";
+  protected static final String PRICE_XPATH = "//div[@class='prezzo mt-15px']";
+  protected static final String SERVICES_XPATH = "//div[@class='lg:w-1/3 lg:pr-40px']/descendant::ul";
+  protected static final String TRAVEL_DURATION_XPATH = "//div[contains(@class,'numeri-viaggio')]/descendant::div[contains(@class,'text')]";
   protected static final String TITLE_XPATH = "//h1[@class='titolo']";
   private Integer COMPANY_ID = 1;
 

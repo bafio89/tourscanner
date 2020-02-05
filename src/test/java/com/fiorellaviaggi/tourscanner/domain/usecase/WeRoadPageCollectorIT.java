@@ -20,6 +20,6 @@ public class WeRoadPageCollectorIT
     weRoadPageCollector = new WeRoadPageCollector(scraperService);
 
     weRoadPageCollector
-      .execute(asSet(new TourUrl("Thailandia", new URL("https://www.weroad.it/viaggi/viaggio-di-gruppo-islanda-trekking-adventure"))));
+      .execute(asSet(new TourUrl("Thailandia", new URL("https://www.weroad.it/viaggi/itinerari-marocco"))));
   }
 }

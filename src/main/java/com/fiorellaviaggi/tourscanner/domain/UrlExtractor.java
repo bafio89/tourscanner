@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toList;
 public class UrlExtractor
 {
   private static final Logger LOGGER = LoggerFactory.getLogger(UrlExtractor.class);
-  public static final String URLS_XPATH = "//a[@class='flex items-start ']";
+  public static final String URLS_XPATH = "//a[@class='flex items-start ' or @class='flex items-start new-destination']";
   private String BASE_PATH = "https://www.weroad.it";
 
   public Set<TourUrl> execute(HtmlPage homePage)
