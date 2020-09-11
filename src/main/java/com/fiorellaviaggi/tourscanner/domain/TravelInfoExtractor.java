@@ -15,8 +15,9 @@ public class TravelInfoExtractor
   protected static final String COMMON_CASH_DESCRIPTION_ALTERNATIVE_XPATH = "//div[@class='lg:w-1/3 lg:pr-40px'][2]/descendant::div[3]";
   protected static final String COMMON_CASH_SERVICES_XPATH = "//div[@class='lg:w-1/3 lg:pr-40px']/descendant::ul";
   protected static final String ITINERARY_XPATH = "//div[@class='left-testata']";
-  protected static final String PRICE_XPATH = "//div[@class='prezzo mt-15px']";
+  protected static final String PRICE_XPATH = "//div[contains(@class, 'prezzo') and contains(@class, 'mt-15px')]";
   protected static final String SERVICES_XPATH = "//div[@class='lg:w-1/3 lg:pr-40px']/descendant::ul";
+  protected static final String ALTERNATIVE_SERVICES_XPATH = "";
   protected static final String TRAVEL_DURATION_XPATH = "//div[contains(@class,'numeri-viaggio')]/descendant::div[contains(@class,'text')]";
   protected static final String TITLE_XPATH = "//h1[@class='titolo']";
   private Integer COMPANY_ID = 1;
@@ -75,14 +76,30 @@ public class TravelInfoExtractor
 
   private Services extractServices(HtmlPage page)
   {
-    List<HtmlElement> services = page.getByXPath(getServicesXpath());
-
-    checkElementPresence(services, "services", page.getTitleText());
+    List<HtmlElement> services = extractServicesHtmlElements(page);
 
     List<String> includedServices = extractIncludedServices(services, page.getTitleText());
     List<String> notIncludedServices = extractNotIncludedServices(services, page.getTitleText());
 
     return new Services(includedServices, notIncludedServices);
+  }
+
+  private List<HtmlElement> extractServicesHtmlElements(HtmlPage page)
+  {
+    List<HtmlElement> services = page.getByXPath(getServicesXpath());
+
+    if(services.size() == 0)
+    {
+      services = page.getByXPath(getAlternativeServicesXpath());
+    }
+
+    if(services.size() == 0)
+    {
+      LOGGER.warn(String.format("Impossible to get element %s", "services"));
+      throw new PageStructureChangedException(String.format("Impossible to get element %s. Page: %s ", "services",
+                                                            page.getTitleText()));
+    }
+    return services;
   }
 
   private List<String> extractIncludedServices(List<HtmlElement> services, String titleText)
@@ -157,5 +174,9 @@ public class TravelInfoExtractor
   protected Integer getCompanyId()
   {
     return COMPANY_ID;
+  }
+
+  protected String getAlternativeServicesXpath(){
+    return ALTERNATIVE_SERVICES_XPATH;
   }
 }

@@ -1,6 +1,7 @@
 package com.fiorellaviaggi.tourscanner;
 
 import com.fiorellaviaggi.tourscanner.domain.ScraperService;
+import com.fiorellaviaggi.tourscanner.domain.ViaggiavventuraUseCase;
 import com.fiorellaviaggi.tourscanner.domain.usecase.ScraperUseCase;
 import com.fiorellaviaggi.tourscanner.domain.usecase.SiVolaScraperUseCase;
 import com.fiorellaviaggi.tourscanner.domain.usecase.WeRoadPageCollector;
@@ -22,16 +23,19 @@ public class TourscannerApplication {
 
 	private static ScraperUseCase weRoadScraperService;
 	private static SiVolaScraperUseCase siVolaScraperService;
+	private static ViaggiavventuraUseCase viaggiavventuraUseCase;
 
 	private static ScraperService scraperService;
 
 	public TourscannerApplication(ScraperUseCase weRoadScraperService,
 																SiVolaScraperUseCase siVolaScraperService,
-																ScraperService scraperService)
+																ScraperService scraperService,
+																ViaggiavventuraUseCase viaggiavventuraUseCase)
 	{
 		this.weRoadScraperService = weRoadScraperService;
 		this.siVolaScraperService = siVolaScraperService;
 		this.scraperService = scraperService;
+		this.viaggiavventuraUseCase = viaggiavventuraUseCase;
 	}
 
 	public static void main(String[] args) {
@@ -39,10 +43,29 @@ public class TourscannerApplication {
 
 		try
 		{
-			weRoadScraperService.execute(scraperService.execute(new URL("https://www.weroad.it")));
+//			weRoadScraperService.execute(scraperService.execute(new URL("https://www.weroad.it")));
 //			siVolaScraperService.execute(scraperService.execute(new URL("https://www.sivola.it/viaggi")),
 //																	 scraperService.execute(new URL("https://www.sivola.it/viaggi?page=2")));
 
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indiceitalianuovo_.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indiceeuropanuovo_.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indicenordafricanuovo_.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indicesaharanuovo_.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indiceafricaoccnuovo_.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indiceafricacentralenuovo_.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indiceafricameridionalenuovo_.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indicemedioorientenuovo_.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indiceasiacentralenuovo_.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indiceindianuovo_.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indicesudestasianuovo_.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indicecinanuovo_.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indicemongoliasiberianuovo.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indiceestremoorientenuovo_.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indicenordamericanuovo_.php"));
+			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indicenordamericanuovo_.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indicecentroamericanuovo_.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indicesudamericanuovo_.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indiceoceanianuovo_.php"));
 			LOGGER.info("Process ended: OK");
 		}
 		catch (IOException e)

@@ -9,6 +9,7 @@ public class SiVolaTravelInfoExtractor extends TravelInfoExtractor
   private static final String TITLE_XPATH = "//div[contains(@class, 'nome-viaggio')]/h1";
   private static final String TRAVEL_DURATION_XPATH = "//div[contains(@class, 'card-dettaglio')]/descendant::div[@class='h4']";
   private static final String SERVICES_XPATH = "//div[@class='col-12 col-lg-6']/descendant::ul";
+  private static final String ALTERNATIVE_SERVICES_XPATH = "//div[contains(@class,'col-12')]/descendant::ul";
   private static final String PRICE_XPATH = "//span[@class='text-success h1 font-weight-bolder d-block']";
   private static final String ITINERARY_XPATH = "//h2[@class='h4 font-weight-bolder pr-1']";
 
@@ -29,6 +30,10 @@ public class SiVolaTravelInfoExtractor extends TravelInfoExtractor
   @Override
   public String getServicesXpath(){
     return SERVICES_XPATH;
+  }
+  @Override
+  public String getAlternativeServicesXpath(){
+    return ALTERNATIVE_SERVICES_XPATH;
   }
 
   @Override

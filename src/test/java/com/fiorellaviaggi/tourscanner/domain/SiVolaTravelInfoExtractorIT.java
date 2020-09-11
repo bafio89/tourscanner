@@ -20,7 +20,7 @@ public class SiVolaTravelInfoExtractorIT
   {
     travelInfoExtractor = new SiVolaTravelInfoExtractor();
 
-    HtmlPage travelPage = scraperService.execute(new URL("https://sivola.it/viaggi/islanda-il-grande-nord"));
+    HtmlPage travelPage = scraperService.execute(new URL("https://www.sivola.it/viaggi/canada-on-the-road"));
 
     TourUrl cambogiaUrl = new TourUrl("Islanda", new URL("https://sivola.it/viaggi/islanda-il-grande-nord"));
     TravelInfo cambogia = travelInfoExtractor.execute(travelPage, cambogiaUrl);

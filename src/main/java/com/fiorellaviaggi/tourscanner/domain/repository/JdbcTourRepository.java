@@ -48,7 +48,7 @@ public class JdbcTourRepository implements TourRepository
     GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 
     MapSqlParameterSource params = new MapSqlParameterSource();
-    params.addValue("NAME",  travelInfo.getNation());
+    params.addValue("NAME",  travelInfo.getNation().trim());
 
     jdbcTemplate.update(NATION_QUERY,params, keyHolder);
 

@@ -5,6 +5,7 @@ import com.fiorellaviaggi.tourscanner.domain.SiVolaTravelInfoExtractor;
 import com.fiorellaviaggi.tourscanner.domain.SiVolaUrlExtractor;
 import com.fiorellaviaggi.tourscanner.domain.TravelInfoExtractor;
 import com.fiorellaviaggi.tourscanner.domain.UrlExtractor;
+import com.fiorellaviaggi.tourscanner.domain.ViaggiavventuraUseCase;
 import com.fiorellaviaggi.tourscanner.domain.repository.JdbcTourRepository;
 import com.fiorellaviaggi.tourscanner.domain.usecase.SiVolaPageCollector;
 import com.fiorellaviaggi.tourscanner.domain.usecase.WeRoadPageCollector;
@@ -57,4 +58,12 @@ public class UseCaseConfig
   {
     return new SiVolaScraperUseCase(new SiVolaUrlExtractor(), new SiVolaTravelInfoExtractor(), siVolaPageCollector, tourRepository);
   }
+
+  @Bean
+  public ViaggiavventuraUseCase viaggiavventuraUseCase(TourRepository tourRepository)
+  {
+    return new ViaggiavventuraUseCase(tourRepository);
+  }
+
+
 }

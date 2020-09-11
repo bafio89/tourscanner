@@ -20,7 +20,7 @@ public class WeRoadTravelInfoExtractorIT
   {
     travelInfoExtractor = new TravelInfoExtractor();
 
-    HtmlPage travelPage = scraperService.execute(new URL("https://www.weroad.it/viaggi/itinerari-marocco"));
+    HtmlPage travelPage = scraperService.execute(new URL("https://www.weroad.it/viaggi/viaggio-singapore-malesia-tour-12-giorni"));
 
     TourUrl cambogiaUrl = new TourUrl("Cambogia", new URL("https://www.weroad.it/viaggi/itinerari-marocco"));
     TravelInfo cambogia = travelInfoExtractor.execute(travelPage, cambogiaUrl);
