@@ -14,7 +14,7 @@ import org.jmock.integration.junit4.JUnitRuleMockery;
 
 import java.net.URL;
 
-public class ScraperUseCaseIT
+public class WeRoadUseCaseIT
 {
   @Rule
   public JUnitRuleMockery context = new JUnitRuleMockery(){{
@@ -28,12 +28,12 @@ public class ScraperUseCaseIT
   private TravelInfoExtractor travelInfoExtractor;
 
   private ScraperService scraperService = new ScraperService();
-  private ScraperUseCase scraperUseCase;
+  private WeRoadUseCase weRoadUseCase;
 
   @Before
   public void setUp() throws Exception
   {
-    scraperUseCase = new ScraperUseCase(
+    weRoadUseCase = new WeRoadUseCase(
       urlExtractor,
                                                     travelInfoExtractor,
                                                     null, null);
@@ -49,7 +49,7 @@ public class ScraperUseCaseIT
       oneOf(urlExtractor).execute(homePage);
     }});
 
-    scraperUseCase.execute(homePage);
+    weRoadUseCase.execute(homePage);
 
   }
 }

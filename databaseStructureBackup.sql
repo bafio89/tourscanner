@@ -1,4 +1,4 @@
-create table tour
+create table tourscanner.tour
 (
     common_cash_description       text,
     common_cash_included_services text,
@@ -18,10 +18,10 @@ create table tour
         primary key
 );
 
-alter table tour
+alter table tourscanner.tour
     owner to postgres;
 
-create table nation
+create table tourscanner.nation
 (
     id   serial      not null
         constraint "NATIONS_pkey"
@@ -31,6 +31,6 @@ create table nation
         unique
 );
 
-alter table nation
+alter table tourscanner.nation
     owner to postgres;
 

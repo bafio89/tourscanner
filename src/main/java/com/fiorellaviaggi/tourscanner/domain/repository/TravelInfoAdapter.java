@@ -2,9 +2,9 @@ package com.fiorellaviaggi.tourscanner.domain.repository;
 
 import com.fiorellaviaggi.tourscanner.domain.TravelInfo;
 
-public class TourAdapter
+public class TravelInfoAdapter
 {
-  public TourRapresentation execute(TravelInfo travelInfo, Integer nationID)
+  public TourRapresentation fromDomainToRepository(TravelInfo travelInfo, Integer nationID)
   {
     return new TourRapresentation(nationID,
                                   travelInfo.getTravelName(),

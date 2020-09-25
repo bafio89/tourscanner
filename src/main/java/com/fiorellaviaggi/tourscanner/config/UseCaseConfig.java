@@ -5,13 +5,13 @@ import com.fiorellaviaggi.tourscanner.domain.SiVolaTravelInfoExtractor;
 import com.fiorellaviaggi.tourscanner.domain.SiVolaUrlExtractor;
 import com.fiorellaviaggi.tourscanner.domain.TravelInfoExtractor;
 import com.fiorellaviaggi.tourscanner.domain.UrlExtractor;
-import com.fiorellaviaggi.tourscanner.domain.ViaggiavventuraUseCase;
+import com.fiorellaviaggi.tourscanner.domain.usecase.ViaggiavventuraUseCase;
 import com.fiorellaviaggi.tourscanner.domain.repository.JdbcTourRepository;
 import com.fiorellaviaggi.tourscanner.domain.usecase.SiVolaPageCollector;
 import com.fiorellaviaggi.tourscanner.domain.usecase.WeRoadPageCollector;
 import com.fiorellaviaggi.tourscanner.domain.usecase.SiVolaScraperUseCase;
 import com.fiorellaviaggi.tourscanner.domain.usecase.TourRepository;
-import com.fiorellaviaggi.tourscanner.domain.usecase.ScraperUseCase;
+import com.fiorellaviaggi.tourscanner.domain.usecase.WeRoadUseCase;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -47,10 +47,10 @@ public class UseCaseConfig
   }
 
   @Bean
-  public ScraperUseCase weRoadScraperUseCase(WeRoadPageCollector weRoadPageCollector, TourRepository tourRepository)
+  public WeRoadUseCase weRoadScraperUseCase(WeRoadPageCollector weRoadPageCollector, TourRepository tourRepository)
   {
 
-    return new ScraperUseCase(new UrlExtractor(), new TravelInfoExtractor(), weRoadPageCollector, tourRepository);
+    return new WeRoadUseCase(new UrlExtractor(), new TravelInfoExtractor(), weRoadPageCollector, tourRepository);
   }
 
   @Bean

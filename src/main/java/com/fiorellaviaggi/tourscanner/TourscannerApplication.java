@@ -1,10 +1,9 @@
 package com.fiorellaviaggi.tourscanner;
 
 import com.fiorellaviaggi.tourscanner.domain.ScraperService;
-import com.fiorellaviaggi.tourscanner.domain.ViaggiavventuraUseCase;
-import com.fiorellaviaggi.tourscanner.domain.usecase.ScraperUseCase;
+import com.fiorellaviaggi.tourscanner.domain.usecase.ViaggiavventuraUseCase;
+import com.fiorellaviaggi.tourscanner.domain.usecase.WeRoadUseCase;
 import com.fiorellaviaggi.tourscanner.domain.usecase.SiVolaScraperUseCase;
-import com.fiorellaviaggi.tourscanner.domain.usecase.WeRoadPageCollector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -21,19 +20,19 @@ public class TourscannerApplication {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(TourscannerApplication.class);
 
-	private static ScraperUseCase weRoadScraperService;
+	private static WeRoadUseCase weRoadScraperService;
 	private static SiVolaScraperUseCase siVolaScraperService;
 	private static ViaggiavventuraUseCase viaggiavventuraUseCase;
 
 	private static ScraperService scraperService;
 
-	public TourscannerApplication(ScraperUseCase weRoadScraperService,
-																SiVolaScraperUseCase siVolaScraperService,
+	public TourscannerApplication(WeRoadUseCase weRoadScraperServiceUseCase,
+																SiVolaScraperUseCase siVolaScraperServiceUseCase,
 																ScraperService scraperService,
 																ViaggiavventuraUseCase viaggiavventuraUseCase)
 	{
-		this.weRoadScraperService = weRoadScraperService;
-		this.siVolaScraperService = siVolaScraperService;
+		this.weRoadScraperService = weRoadScraperServiceUseCase;
+		this.siVolaScraperService = siVolaScraperServiceUseCase;
 		this.scraperService = scraperService;
 		this.viaggiavventuraUseCase = viaggiavventuraUseCase;
 	}

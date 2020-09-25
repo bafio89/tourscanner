@@ -1,7 +1,7 @@
 package com.fiorellaviaggi.tourscanner.domain;
 
 import com.fiorellaviaggi.tourscanner.domain.usecase.TourRepository;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.fiorellaviaggi.tourscanner.domain.usecase.ViaggiavventuraUseCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

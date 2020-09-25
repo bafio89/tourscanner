@@ -21,7 +21,7 @@ public class InMemoryDatasourceConfiguration
   public EmbeddedPostgres embeddedPostgres() throws IOException
   {
     EmbeddedPostgres postgres = new EmbeddedPostgres();
-    url = postgres.start("localhost", 3306, "fiorellaviaggi", "postgres", "developer");
+    url = postgres.start("localhost", 3306, "postgres", "postgres", "developer");
     postgres.getProcess().get().importFromFile(
       new File(Thread.currentThread().getContextClassLoader().getResource("schema.sql").getFile()));
     postgres.getProcess().get().importFromFile(

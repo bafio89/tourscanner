@@ -1,6 +1,10 @@
-package com.fiorellaviaggi.tourscanner.domain;
+package com.fiorellaviaggi.tourscanner.domain.usecase;
 
-import com.fiorellaviaggi.tourscanner.domain.usecase.TourRepository;
+import com.fiorellaviaggi.tourscanner.domain.CommonCash;
+import com.fiorellaviaggi.tourscanner.domain.ScraperService;
+import com.fiorellaviaggi.tourscanner.domain.Services;
+import com.fiorellaviaggi.tourscanner.domain.TourUrl;
+import com.fiorellaviaggi.tourscanner.domain.TravelInfo;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;

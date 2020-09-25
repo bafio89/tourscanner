@@ -3,7 +3,7 @@ spring:
     name: tourScanner
 
   datasource:
-      url: jdbc:postgresql://localhost:5432/fiorellaViaggi
+      url: jdbc:postgresql://localhost:5432/postgres
       username: postgres
       password: developer
       max-connections: 10

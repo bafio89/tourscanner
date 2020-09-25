@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class ScraperUseCase
+public class WeRoadUseCase
 {
   private UrlExtractor urlExtractor;
   private TravelInfoExtractor travelInfoExtractor;
   private WeRoadPageCollector weRoadPageCollector;
   private TourRepository tourRepository;
 
-  public ScraperUseCase(UrlExtractor urlExtractor,
+  public WeRoadUseCase(UrlExtractor urlExtractor,
                         TravelInfoExtractor travelInfoExtractor,
                         WeRoadPageCollector weRoadPageCollector,
                         TourRepository tourRepository)
