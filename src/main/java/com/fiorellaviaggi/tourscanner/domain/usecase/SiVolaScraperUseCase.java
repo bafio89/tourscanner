@@ -37,6 +37,7 @@ public class SiVolaScraperUseCase
     List<Page> pages = siVolaPageCollector.execute(toursUrls);
     pages.forEach(page -> travelInfoList.add(travelInfoExtractor.execute(page.getHtmlPage(), page.getTourUrl())));
 
+    tourRepository.resetActiveTravel();
     travelInfoList.forEach(travelInfo -> tourRepository.save(travelInfo));
   }
 

@@ -16,6 +16,8 @@ public class JdbcTourRepository implements TourRepository {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(JdbcTourRepository.class);
 
+  private String UPDATED_TO_NOT_ACTIVE = "UPDATE tourscanner.tour SET ACTIVE = '0'";
+
   private String GET_TOUR_BY_LINK_QUERY = "SELECT nation_id FROM tourscanner.tour WHERE link_to_tour = :LINK";
 
   private String NATION_QUERY = "INSERT INTO tourscanner.nation (name) VALUES(:NAME)" +
@@ -23,10 +25,10 @@ public class JdbcTourRepository implements TourRepository {
       "SET name = :NAME";
   private String INSERT_TOUR_QUERY = "INSERT INTO tourscanner.tour (common_cash_description," +
       " common_cash_included_services, duration, included_services, itinerary, nation_id," +
-      "not_included_services, title, price, company_id, link_to_tour )" +
+      "not_included_services, title, price, company_id, link_to_tour, active)" +
       " VALUES(:COMMON_CASH_DESCRIPTION, :COMMON_CASH_INCLUDED_SERVICES," +
       " :DURATION, :INCLUDED_SERVICES, :ITINERARY, :NATION_ID, :NOT_INCLUDED_SERVICES, :TITLE," +
-      " :PRICE, :COMPANY_ID, :LINK_TO_TOUR) " +
+      " :PRICE, :COMPANY_ID, :LINK_TO_TOUR, :ACTIVE) " +
       "ON CONFLICT(link_to_tour) DO UPDATE " +
       "SET common_cash_description = :COMMON_CASH_DESCRIPTION," +
       "common_cash_included_services = :COMMON_CASH_INCLUDED_SERVICES," +
@@ -38,7 +40,8 @@ public class JdbcTourRepository implements TourRepository {
       "title = :TITLE," +
       "price = :PRICE," +
       "company_id = :COMPANY_ID," +
-      "link_to_tour = :LINK_TO_TOUR";
+      "link_to_tour = :LINK_TO_TOUR," +
+      "active = :ACTIVE";
 
 
   private TravelInfoAdapter fromDomainToRepository;
@@ -46,6 +49,10 @@ public class JdbcTourRepository implements TourRepository {
 
   public JdbcTourRepository(NamedParameterJdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
+  }
+
+  public void resetActiveTravel(){
+    jdbcTemplate.update(UPDATED_TO_NOT_ACTIVE, new MapSqlParameterSource());
   }
 
   @Override
@@ -99,6 +106,7 @@ public class JdbcTourRepository implements TourRepository {
     params.addValue("PRICE", tourRapresentation.getPrice());
     params.addValue("COMPANY_ID", tourRapresentation.getCompanyId());
     params.addValue("LINK_TO_TOUR", tourRapresentation.getTourLink());
+    params.addValue("ACTIVE", "1");
 
     return params;
   }

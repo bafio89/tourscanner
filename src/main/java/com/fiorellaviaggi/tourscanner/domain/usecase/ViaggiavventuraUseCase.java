@@ -189,6 +189,7 @@ public class ViaggiavventuraUseCase
       }
     });
 
+    tourRepository.resetActiveTravel();
     travels.forEach(travel -> {
       {
         tourRepository.save(travel);

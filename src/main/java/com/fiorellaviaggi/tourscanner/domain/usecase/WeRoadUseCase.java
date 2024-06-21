@@ -36,6 +36,7 @@ public class WeRoadUseCase
     List<Page> pages = weRoadPageCollector.execute(toursUrls);
     pages.forEach(page -> travelInfoList.add(travelInfoExtractor.execute(page.getHtmlPage(), page.getTourUrl())));
 
+    tourRepository.resetActiveTravel();
     travelInfoList.forEach(travelInfo -> tourRepository.save(travelInfo));
   }
 

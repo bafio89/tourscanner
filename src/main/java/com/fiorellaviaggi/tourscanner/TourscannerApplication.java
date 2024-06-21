@@ -43,8 +43,8 @@ public class TourscannerApplication {
 		try
 		{
 //			weRoadScraperService.execute(scraperService.execute(new URL("https://www.weroad.it")));
-//			siVolaScraperService.execute(scraperService.execute(new URL("https://www.sivola.it/viaggi")),
-//																	 scraperService.execute(new URL("https://www.sivola.it/viaggi?page=2")));
+			siVolaScraperService.execute(scraperService.execute(new URL("https://www.sivola.it/viaggi")),
+																	 scraperService.execute(new URL("https://www.sivola.it/viaggi?page=2")));
 
 //			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indiceitalianuovo_.php"));
 //			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indiceeuropanuovo_.php"));
@@ -61,7 +61,7 @@ public class TourscannerApplication {
 //			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indicemongoliasiberianuovo.php"));
 //			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indiceestremoorientenuovo_.php"));
 //			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indicenordamericanuovo_.php"));
-			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indicenordamericanuovo_.php"));
+//			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indicenordamericanuovo_.php"));
 //			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indicecentroamericanuovo_.php"));
 //			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indicesudamericanuovo_.php"));
 //			viaggiavventuraUseCase.execute(new URL("http://www.viaggiavventurenelmondo.it/nuovosito/viaggi/indiceoceanianuovo_.php"));

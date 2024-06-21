@@ -1,5 +1,13 @@
-create table tourscanner.tour
+create table tour
 (
+    id                            serial  not null
+        constraint tour_pkey
+            primary key,
+    title                         varchar not null,
+    link_to_tour                  varchar not null
+        constraint unique_link
+            unique,
+    company_id                    integer not null,
     common_cash_description       text,
     common_cash_included_services text,
     duration                      varchar,
@@ -7,15 +15,8 @@ create table tourscanner.tour
     itinerary                     text,
     nation_id                     integer,
     not_included_services         text,
-    title                         varchar not null,
     price                         varchar not null,
-    company_id                    integer not null,
-    link_to_tour                  varchar not null
-        constraint unique_link
-        unique,
-    id                            serial  not null
-        constraint tour_pkey
-        primary key
+    active                        varchar default '0'
 );
 
 alter table tourscanner.tour

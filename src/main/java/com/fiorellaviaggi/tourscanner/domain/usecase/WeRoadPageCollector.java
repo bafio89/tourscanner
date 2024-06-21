@@ -32,7 +32,8 @@ public class WeRoadPageCollector
                                                "https://www.weroad.it/viaggi/europa",
                                                "https://www.weroad.it/viaggi/middle-east",
                                                "https://www.weroad.it/viaggi/oceania",
-                                               "https://www.weroad.it/viaggi/africa");
+                                               "https://www.weroad.it/viaggi/africa,",
+                                                "https://www.weroad.it/viaggi-gift-card");
 
   public WeRoadPageCollector(ScraperService scraperService)
   {

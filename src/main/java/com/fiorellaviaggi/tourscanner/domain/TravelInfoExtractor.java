@@ -13,7 +13,9 @@ public class TravelInfoExtractor
 {
   protected static final String COMMON_CASH_DESCRIPTION_XPATH = "//div[@class='lg:w-1/3 lg:pr-40px'][2]/descendant::p";
   protected static final String COMMON_CASH_DESCRIPTION_ALTERNATIVE_XPATH = "//div[@class='lg:w-1/3 lg:pr-40px'][2]/descendant::div[3]";
+  protected static final String COMMON_CASH_DESCRIPTION_ALTERNATIVE_XPATH_2 = "//div[@class='lg:w-1/3 lg:pr-40px']";
   protected static final String COMMON_CASH_SERVICES_XPATH = "//div[@class='lg:w-1/3 lg:pr-40px']/descendant::ul";
+  protected static final String ALTERNATIVE_COMMON_CASH_SERVICES_XPATH = "//div[@class='lg:w-1/3 lg:pr-40px'][2]/descendant::li";
   protected static final String ITINERARY_XPATH = "//div[@class='left-testata']";
   protected static final String PRICE_XPATH = "//div[contains(@class, 'prezzo') and contains(@class, 'mt-15px')]";
   protected static final String SERVICES_XPATH = "//div[@class='lg:w-1/3 lg:pr-40px']/descendant::ul";
@@ -26,7 +28,7 @@ public class TravelInfoExtractor
 
   public TravelInfo execute(HtmlPage page, TourUrl tourUrl)
   {
-
+LOGGER.info("Extracting for {} ", extractTitle(page));
     return new TravelInfo(tourUrl.getNation(), extractTitle(page), extractTravelDuration(page),
                           extractServices(page),
                           extractPrice(page), extractItinerary(page),
@@ -44,17 +46,36 @@ public class TravelInfoExtractor
     if(commonCashDescription.size() == 0 ){
       commonCashDescription = page.getByXPath(COMMON_CASH_DESCRIPTION_ALTERNATIVE_XPATH);
     }
+    if(commonCashDescription.size() == 0){
+      commonCashDescription = page.getByXPath(COMMON_CASH_DESCRIPTION_ALTERNATIVE_XPATH_2);
+    }
 
     checkElementPresence(commonCashDescription, "commonCashDescription", page.getTitleText());
 
-    return getTextFromFirstElement(commonCashDescription);
+    String textFromFirstElement = getTextFromFirstElement(commonCashDescription);
+
+    if(textFromFirstElement.isEmpty()){
+        textFromFirstElement = getTextFromLastElement(commonCashDescription);
+    }
+
+    return textFromFirstElement;
   }
 
   private List<String> extractCommonCashServices(HtmlPage page)
   {
     List<HtmlElement> services = page.getByXPath(COMMON_CASH_SERVICES_XPATH);
     checkElementPresence(services, "commonCashServices", page.getTitleText());
-    List<HtmlElement> commonCashServicesHtmlElements = services.get(2).getByXPath("descendant::li");
+
+    List<HtmlElement> commonCashServicesHtmlElements = null;
+
+    if(services.size() >= 3 ) {
+
+       commonCashServicesHtmlElements = services.get(2)
+          .getByXPath("descendant::li");
+    }else{
+      commonCashServicesHtmlElements = page.getByXPath(ALTERNATIVE_COMMON_CASH_SERVICES_XPATH);
+      checkElementPresence(services, "commonCashServices", page.getTitleText());
+    }
     checkElementPresence(commonCashServicesHtmlElements, "commonCashServicesHtmlElements", page.getTitleText());
     return commonCashServicesHtmlElements.stream().map(HtmlElement::asText)
                                          .collect(toList());
@@ -139,6 +160,10 @@ public class TravelInfoExtractor
   private String getTextFromFirstElement(List<HtmlElement> elements)
   {
     return elements.get(0).asText();
+  }
+  private String getTextFromLastElement(List<HtmlElement> elements)
+  {
+    return elements.get(elements.size() - 1).asText();
   }
 
   private void checkElementPresence(List<HtmlElement> elementList, String elementName, String titleText)
